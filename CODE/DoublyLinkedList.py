@@ -43,7 +43,7 @@ class DoublyLinkedList:
         self.size += 1
         
     def add_first(self,data):
-        self.add_after(self.header,data)
+        self.add_after(self.header, data)
     
     def add_last(self,data):
         self.add_after(self.trailer.prev, data)
