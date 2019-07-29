@@ -41,7 +41,7 @@ class BinarySearchTreeMap:
 
     #overloading bracket operator to allow for syntax: m[key] 
     def __getitem__(self,key):
-        node =self.find(key)
+        node = self.find(key)
         if node is None:
             raise KeyError(str(key) + "is not found")
         else:
@@ -49,8 +49,30 @@ class BinarySearchTreeMap:
     
     #return the node whose item has key 'key' or (None)
     def find(self,key):
-        pass
-    
+        curr = self.root
+        while curr is not None:
+            if key == curr.item.key:
+                return curr
+            elif key < curr.item.key:
+                curr = curr.left
+            else:
+                curr = curr.right
+        return None
+    """
+    Recursive
+    def find(self,key):
+        def find_helper(subtree_root,key):
+            if subtree_root is None:
+                return None
+            curr_item= subtree_root.item
+            if key = curr_item.key:
+                return subtree_root
+            elif key < curr_item.key:
+                return find_helper(subtree_root.left,key)
+            else:
+                return find_helper(subtree_root.right, key)
+        return find_helper(self.root,key)
+    """
     def __setitem__(self,key,value):
         node = self.find(key)
         if node is not None:
@@ -58,8 +80,35 @@ class BinarySearchTreeMap:
         else:
             self.insert(key,value)
 
+    def insert(self,key,value):
+        new_item = BinarySearchTreeMap.Item(key, value)
+        new_node = BinarySearchTreeMap.Node(new_item)
 
+        if self.is_empty():
+            self.root = new_node
+            self.size += 1
 
+        else:    
+            parent = self.root
+            if key < self.root.item.key:
+                curr = self.root.left
+            else:
+                curr = self.root.right
+
+            while (curr is not None):
+                parent = curr
+                if key < curr.item.key:
+                    curr = curr.left
+                else:
+                    curr = curr.right
+
+            if key < parent.item.key:
+                parent.left = new_node
+            else:
+                parent.right = new_node
+
+        new_node.parent = parent
+        self.size += 1
 
 
 
@@ -76,7 +125,7 @@ class BinarySearchTreeMap:
     def height(self):
         return self. subtree_height(self.root)
 
-    def subtree_height(Self, subtree_root):
+    def subtree_height(self, subtree_root):
         if self.subtree_root.left is None and self.subtree_root.righ is None:
             return 0
         elif subtree_root.left is None:
