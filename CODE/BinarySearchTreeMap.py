@@ -110,6 +110,80 @@ class BinarySearchTreeMap:
         new_node.parent = parent
         self.size += 1
 
+#removes entry with key from the tree or raises an excpetion of key is not in tree
+    def __delitem__(self, key):
+        node = self.find(key)
+        if node is not None:
+            self.delete_node(node)
+        else:
+            raise KeyError(str(key) " " is not found)
+            
+    def delete_node(self, node_to_delete):
+        item = node_to_delete.item
+        num_children = node_to_delete.num_children()
+        # node to delete is root
+        if node_to_delete is self.root:
+            if num_children == 0:
+                self.root = None
+                node_to_delete.disconnect()
+                self.size -= 1
+            elif num_children == 1:
+                if (self.root.left is not None):
+                    self.root = self.root.left
+                else:
+                    self.root = self.root.right
+                self.root.parent = None
+                node_to_delete.disconnect()
+                self.size -= 1
+            else: # num of children is 2
+                max_of_left = self.subtree_max(node_to_delete.left)
+                node_to_delete.item = max_of_left.item
+                self.delete_node(max_of_left)
+        else:
+            if num_children == 0:
+                parent = node_to_delete.parent
+                if node_to_delete is parent.right:
+                    parent.right == None
+                else:
+                    parent.left = None
+                node_to_delete.disconnect()
+                self.size -= 1
+
+            elif num_children == 1:
+                parent = node_to_delete.parent
+                if node_to_delete.left is not None:
+                    child = node_to_delete.left
+                else:
+                    child = node_to_delete.right
+                if node_to_delete is parent.left:
+                    parent.left = child
+                else:
+                    parent.right = child
+
+                child.parent= parent
+                node_to_delete.disconnect()
+                self.size -= 1
+
+
+            else: # num children == 2
+                max_of_left = self.subtree_max(node_to_delete.left)
+                node_to_delete.item = max_of_left.item
+                self.delete_node(max_of_left)
+
+            return item
+
+""" Recursion 
+    def subtree_max(self,subtree_root):
+        if subtree_root.right is None:
+            return subtree_root
+        else:
+            return subtree_max(subtree_root.right)
+"""
+    def subtree_max(self, subtree_root):
+        curr_node = subtree_root
+        while curr_node is not None:
+            curr_node = curr_node.right
+        return subtree_root
 
 
     def sum_nodes(self):
@@ -193,7 +267,10 @@ class BinarySearchTreeMap:
             if (curr_node.right is not None):
                 nodes_q.enqueue(curr_node.right)
 
-
+    def __iter__(self):
+        for node in self.inorder:
+            yield node.item.key
+        
 root_node - LinkedBinaryTree.Node(1)
 my_tree = LinkedBinaryTree.Node(root_node)
 
