@@ -4,7 +4,7 @@ class ChainingHashMap:
     def __init__(self, N=64, p=40206835204840513073):
         self.table_size = N
         self.number_of_items = 0
-        self.table =[DoublyLinkedList() for i in range(self.N)]
+        self.table =[DoublyLinkedList() for i in range(self.table_size)]
         self.p = p
         self.a = random.randrange(1, self.p -1)
         self.b = random.randrange(0, self.p -1)
@@ -60,22 +60,22 @@ myMap= ChainingHashMap(128)
 
 
 
-ht =ChainingHashTableMap()
-for i in range(100):
-    ht[i * i] = i
+# ht =ChainingHashTableMap()
+# for i in range(100):
+#     ht[i * i] = i
 
-for i in range(ht.N):
-   # print(i , ":" ,sep=" ", end=" ")
-    curr_bucket =ht.table[i]
-    for key in curr_bucket:
-        print("(",key, "," , curr_bucket[key], ")", sep="", end="" )
+# for i in range(ht.N):
+#    # print(i , ":" ,sep=" ", end=" ")
+#     curr_bucket =ht.table[i]
+#     for key in curr_bucket:
+#         print("(",key, "," , curr_bucket[key], ")", sep="", end="" )
 
-for i in range(80):
-    del ht[i * i]
+# for i in range(80):
+#     del ht[i * i]
 
 
-for i in range(ht.N):
-    print(i , ":" ,sep=" ", end=" ")
-    curr_bucket =ht.table[i]
-    for key in curr_bucket:
-        print("(", key, "," , curr_bucket[key], ")", sep="", end="" )
+# for i in range(ht.N):
+#     print(i , ":" ,sep=" ", end=" ")
+#     curr_bucket =ht.table[i]
+#     for key in curr_bucket:
+#         print("(", key, "," , curr_bucket[key], ")", sep="", end="" )
