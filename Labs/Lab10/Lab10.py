@@ -17,7 +17,7 @@ def list_intersection(lst1, lst2):
 
 #problem 3
 def mode_of_list(lst):
-    max_count =0
+    max_count = 0
     num = None
     ht = ChainingHashMap()
     for i in range(len(lst1)):
