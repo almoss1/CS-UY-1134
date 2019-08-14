@@ -21,10 +21,10 @@ class ArrayMinHeap:
         return len(self) == 0
 
     def left_idx(self,i):
-        return 2*i +1
+        return 2*i + 1
 
     def right_idx(Self,i):
-        return 2*i +2
+        return 2*i + 2
 
     def parent_idx(self,i):
         return (i-1) // 2
@@ -66,3 +66,44 @@ class ArrayMinHeap:
             
     def swap(self, i, j):
         self.data[i], self.data[j] = self.data[j], self.data[i]
+
+
+    def delete_min(self):
+        if self.is_empty():
+            raise Exception("Priority Queue is empty")
+        self.swap(0, len(self.data)-1)
+        item = self.data.pop()
+        if not self.is_empty():
+            self.sift_down(0)
+        return item
+
+       
+    def sift_down(self,i):
+        if not self.has_left(i):
+            return
+        left_idx = self.left_ind(i)
+        min_child_idx = left_idx
+        if self.has_right(i):
+            right_idx = self.right_idx(i)
+            if self.data[right_idx] < self.data[min_child_idx]:
+                min_child_idx = right_idx
+        
+        if self.data[min_child_idx] > self.data[i]:
+            self.swap(min_child_idx, i)
+            self.sift_down(min_child_idx)
+
+
+# merge sort runtime is theta(nlog(n))
+#runtime is theta(nlog(n))
+def heap_sort(lst):
+    heap = ArrayMinHeap()
+    for elem in lst:
+        heap.insert(elem)
+    srt_lst = []
+    while not heap.is_empty():
+        item = heap.delete_min()
+        srt_lst.append(item.priority)
+    return srt_lst
+
+srt_lst = heap_sort([5])
+print(srt_lst)
