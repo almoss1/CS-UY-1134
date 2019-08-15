@@ -14,7 +14,7 @@
                 total = left_sum + right_sum + subtree_root.data
                 if left_bool == False or right_bool == False:
                     return (total, False)
-                elif (-1 <= left_sum - right_sum) <=1:
+                elif (-1 <= left_sum - right_sum <=1):
                     return (total, True)
                 else:
                     return (total,False)
