@@ -20,7 +20,7 @@ class BinarySearchTreeMap:
             count = 0
             if self.left is not None:
                 count += 1
-            if sel.right is not None:
+            if self.right is not None:
                 count += 1
 
         def disconnect(Self):

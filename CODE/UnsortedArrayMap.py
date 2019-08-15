@@ -34,7 +34,7 @@ class UnsortedArrayMap:
     def __delitem__(self,key):
         for idx in range(len(self.table)):
             if key == self.table[idx].key:
-                #coudl do one or the other, a litel better runtime
+                #could do one or the other, a little better runtime
                 self.table.pop(idx)
                 # self.table[idx], self.table[-1] = self.table[-1], self.table[idx]
                 # self.table.pop()

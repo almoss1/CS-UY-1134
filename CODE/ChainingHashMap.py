@@ -64,6 +64,7 @@ class ChainingHashMap:
             new_item = ChainingHashMap.Item(key,value)
             bucket.add_last(new_item)
             self.number_of_items += 1
+
         if self.number_of_items >= self.table_size:
             self.rehash(2 * self.table_size)
         
