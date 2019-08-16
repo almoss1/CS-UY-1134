@@ -23,7 +23,7 @@ class ArrayMinHeap:
     def left_idx(self,i):
         return 2*i + 1
 
-    def right_idx(Self,i):
+    def right_idx(self,i):
         return 2*i + 2
 
     def parent_idx(self,i):
@@ -42,16 +42,16 @@ class ArrayMinHeap:
 
     def insert(self, priority, value = None):
         self.data.append(ArrayMinHeap.Item(priority,value))
-        self.buble_up(len(self.data-1))
+        self.bubble_up(len(self.data-1))
 
-    def buble_up(self,i):
-        if i ==0:
+    def bubble_up(self,i):
+        if i == 0:
             return
         else:
             parent = self.parent_idx(i)
-            if self.data[i] <self.data[parent]:
+            if self.data[i] < self.data[parent]:
                 self.swap(i, parent)
-                self.buble_up(parent)
+                self.bubble_up(parent)
 
         """
         #iterative way

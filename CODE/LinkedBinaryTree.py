@@ -43,7 +43,7 @@ class LinkedBinaryTree:
     def height(self):
         return self. subtree_height(self.root)
 
-    def subtree_height(Self, subtree_root):
+    def subtree_height(self, subtree_root):
         if self.subtree_root.left is None and self.subtree_root.righ is None:
             return 0
         elif subtree_root.left is None:
@@ -57,10 +57,10 @@ class LinkedBinaryTree:
         
         
     def preorder(self):
-        yield from self.subtree_preorder(self,subtree_root)
+        yield from self.subtree_preorder(self.subtree_root)
     
     #yields all values in the nodes of the subtree rooted at "subtree_root"
-    def subtree_preorder(self,subtree_root):
+    def subtree_preorder(self.subtree_root):
         if subtree_root is None:
             return
         else:
@@ -81,8 +81,6 @@ class LinkedBinaryTree:
             yield from self.subtree_inorder(subtree_root.left)
             yield subtree_root.data
             yield from self.subtree_inorder(subtree_root.right)
-
-
 
     def postorder(self):
         yield from self.subtree_postorder(self.subtree_root)
